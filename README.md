@@ -18,7 +18,7 @@ Or install it yourself as:
 
     $ gem install rscratch
 
-After you install Scratches, you need to run the generator:
+After you install RScratch, you need to run the generator:
 
     $ rake rscratch:install:migrations
 
@@ -31,6 +31,32 @@ You should restart your application after installing RScratch gem.
 ## Usage
 Add this following line in rescue block of your your code. An example is given below
 
+```ruby
+  Rscratch::Exception.log e,request
+```
+
+An example is given below
+
+```ruby
+  def create
+    begin
+      @post = Post.new(params[:post])
+      @post.save
+      respond_to do |format|
+        format.html { redirect_to @post, notice: 'Post was successfully created.' }
+        format.json { render json: @post, status: :created, location: @post }
+      end      
+    rescue Exception => e
+      # Log exception in RScratch
+      Rscratch::Exception.log e,request
+      
+      respond_to do |format|
+        format.html { redirect_to posts_path }
+        format.json { render json: @post.errors, status: :unprocessable_entity }
+      end            
+    end
+  end
+```
 
 ## Contributing
 
