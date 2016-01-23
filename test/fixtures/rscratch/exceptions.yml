@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  exception: MyText
+  message: MyText
+  controller: MyString
+  action: MyString
+  app_environment: MyString
+  total_occurance_count: 1
+  new_occurance_count: 1
+
+two:
+  exception: MyText
+  message: MyText
+  controller: MyString
+  action: MyString
+  app_environment: MyString
+  total_occurance_count: 1
+  new_occurance_count: 1
