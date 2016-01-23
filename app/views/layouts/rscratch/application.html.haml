@@ -1,0 +1,18 @@
+!!!
+%html
+  %head
+    %title Rscratch
+    = stylesheet_link_tag    "rscratch/application", :media => "all"
+    / Import Google Icon Font
+    %link{:href => "http://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}
+
+    / Compiled and minified CSS
+    %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css", :rel => "stylesheet"}
+
+    = javascript_include_tag "rscratch/application"
+    = csrf_meta_tags
+  %body
+    = yield
+  %footer
+    / Compiled and minified JavaScript
+    %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"}  
