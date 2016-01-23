@@ -28,7 +28,7 @@ The generator will create few migration files, will contain gem data. It is impe
 
 You should restart your application after installing RScratch gem.
 
-## Usage or Integration
+## Integration
 Add this following line in rescue block of your your code. An example is given below
 
 ```ruby
@@ -58,13 +58,15 @@ An example is given below
   end
 ```
 
-## Web UI
+## Usage
 Mount the RScratch in your application:
 
 ```ruby
 # config/routes.rb
 mount Rscratch::Engine => "/rscratch"
 ```
+Now everything looks sparky, just go to the following path to track your application exceptions.
+http://<APP_URL>/rscratch/
 
 ## Contributing
 
