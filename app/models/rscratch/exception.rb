@@ -20,7 +20,7 @@ module Rscratch
 
     # Log an exception
     def self.log(exc,request) 
-      _exception = find_or_add_exception(exc,request.filtered_parameters["controller"].camelize,request.filtered_parameters["action"],Rails.env.camelize)
+      _exception = self.find_or_add_exception(exc,request.filtered_parameters["controller"].camelize,request.filtered_parameters["action"],Rails.env.camelize)
       _excp_log = ExceptionLog.new(
                                   :description         => exc.inspect,
                                   :backtrace           => exc.backtrace.join("\n"),
@@ -34,10 +34,8 @@ module Rscratch
       return _exception
     end
 
-    private
-
     # Log unique exceptions
-    def find_or_add_exception exc,_controller,_action,_env              
+    def self.find_or_add_exception exc,_controller,_action,_env              
       _excp = Exception.by_exception(exc.class).by_message(exc.message).by_controller(_controller).by_action(_action).by_environment(_env)
       if _excp.present?
         return _excp.first
