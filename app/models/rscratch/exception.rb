@@ -16,9 +16,28 @@ module Rscratch
     scope :by_message, lambda {|msg|where(["message=?", msg])}                      
     scope :by_controller, lambda {|con|where(["controller=?", con])}                      
     scope :by_action, lambda {|act|where(["action=?", act])}                      
-    scope :by_environment, lambda {|env|where(["app_environment=?", env])}        
+    scope :by_environment, lambda {|env|where(["app_environment=?", env])}   
 
-    def self.find_or_add_exception exc,_controller,_action,_env              
+    # Log an exception
+    def self.log(exc,request) 
+      _exception = find_or_add_exception(exc,request.filtered_parameters["controller"].camelize,request.filtered_parameters["action"],Rails.env.camelize)
+      _excp_log = ExceptionLog.new(
+                                  :description         => exc.inspect,
+                                  :backtrace           => exc.backtrace.join("\n"),
+                                  :request_url         => request.original_url,
+                                  :request_method      => request.request_method,
+                                  :parameters          => request.filtered_parameters,
+                                  :user_agent          => request.user_agent,
+                                  :client_ip           => request.remote_ip,
+                                  :status              => "new")
+      _exception.exception_logs << _excp_log
+      return _exception
+    end
+
+    private
+
+    # Log unique exceptions
+    def find_or_add_exception exc,_controller,_action,_env              
       _excp = Exception.by_exception(exc.class).by_message(exc.message).by_controller(_controller).by_action(_action).by_environment(_env)
       if _excp.present?
         return _excp.first
