@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  exception_id: 1
+  description: MyText
+  backtrace: MyText
+  request_url: MyText
+  request_method: MyString
+  parameters: MyText
+  user_agent: MyString
+  client_ip: MyString
+  status: MyString
+
+two:
+  exception_id: 1
+  description: MyText
+  backtrace: MyText
+  request_url: MyText
+  request_method: MyString
+  parameters: MyText
+  user_agent: MyString
+  client_ip: MyString
+  status: MyString
