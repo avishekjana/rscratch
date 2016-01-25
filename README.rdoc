@@ -62,9 +62,8 @@ An example is given below
 
 
 == Usage
-Mount the RScratch in your application:
+Mount the RScratch in your application route file:
 
-# config/routes.rb
 mount Rscratch::Engine => "/rscratch"
 
 Now everything looks sparky. Just go to the following path to track exceptions raised from your application .
