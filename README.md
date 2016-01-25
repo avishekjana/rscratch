@@ -9,10 +9,13 @@ Add this line to your application's Gemfile:
 ```ruby
 gem 'rscratch'
 ```
-
+or
+```ruby
+gem 'rscratch', :git => 'git://github.com/avishekjana/rscratch.git'
+```
 And then execute:
 
-    $ bundle
+    $ bundle install
 
 Or install it yourself as:
 
