@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
 
   # s.add_dependency "jquery-rails"
 
-  s.add_dependency "smart_listing", "~>1.1.0"
+  s.add_dependency "smart_listing"
   s.add_dependency "haml"
 
   s.add_development_dependency "sqlite3"
