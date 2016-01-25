@@ -68,7 +68,7 @@ Mount the RScratch in your application:
 # config/routes.rb
 mount Rscratch::Engine => "/rscratch"
 ```
-Now everything looks sparky. Just go to the following path to track your application exceptions.
+Now everything looks sparky. Just go to the following path to track exceptions raised from your application .
 
 http://{YOUR_APP_URL}/rscratch/
 
