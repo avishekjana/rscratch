@@ -1,18 +1,18 @@
-# RScratch
+== RScratch
 
 By Avishek Jana
 
-## Installation
+=== Installation
 
 Add this line to your application's Gemfile:
 
-```ruby
-gem 'rscratch'
-```
+
+    gem 'rscratch'
+
 or
-```ruby
-gem 'rscratch', :git => 'git://github.com/avishekjana/rscratch.git'
-```
+
+    gem 'rscratch', :git => 'git://github.com/avishekjana/rscratch.git'
+
 And then execute:
 
     $ bundle install
@@ -31,16 +31,16 @@ The generator will create few migration files, will contain gem data. It is impe
 
 You should restart your application after installing RScratch gem.
 
-## Integration
+== Integration
 Add this following line in rescue block of your your code. An example is given below
 
-```ruby
+
   Rscratch::Exception.log e,request
-```
+
 
 An example is given below
 
-```ruby
+
   def create
     begin
       @post = Post.new(params[:post])
@@ -59,25 +59,24 @@ An example is given below
       end            
     end
   end
-```
 
-## Usage
+
+== Usage
 Mount the RScratch in your application:
 
-```ruby
 # config/routes.rb
 mount Rscratch::Engine => "/rscratch"
-```
+
 Now everything looks sparky. Just go to the following path to track exceptions raised from your application .
 
 http://{YOUR_APP_URL}/rscratch/
 
-## Contributing
+== Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/avishekjana/rscratch. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
 
 
-## License
+== License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
 
