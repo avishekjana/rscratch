@@ -1,2 +1,7 @@
-%h1 Dashboard#index
-=debug @exceptions
+.teal.darken-3.col.s12.12
+  .section.p20    
+    %h5.teal-text.text-lighten-5.font-16 Latest Scratches
+    %h6.teal-text.text-lighten-3.font-12 Bugs and Exceptions in your application
+    %div{:style=>"min-height:250px;"}
+      %canvas#exception-line-canvas{:height => "80"}
+    .clearfix
