@@ -2,7 +2,7 @@
 
 By Avishek Jana
 
-=== Installation
+== Installation
 
 Add this line to your application's Gemfile:
 
@@ -41,24 +41,24 @@ Add this following line in rescue block of your your code. An example is given b
 An example is given below
 
 
-  def create
-    begin
-      @post = Post.new(params[:post])
-      @post.save
-      respond_to do |format|
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
-        format.json { render json: @post, status: :created, location: @post }
-      end      
-    rescue Exception => e
-      # Log exception in RScratch
-      Rscratch::Exception.log e,request
-      
-      respond_to do |format|
-        format.html { redirect_to posts_path }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end            
-    end
+def create
+  begin
+    @post = Post.new(params[:post])
+    @post.save
+    respond_to do |format|
+      format.html { redirect_to @post, notice: 'Post was successfully created.' }
+      format.json { render json: @post, status: :created, location: @post }
+    end      
+  rescue Exception => e
+    # Log exception in RScratch
+    Rscratch::Exception.log e,request
+    
+    respond_to do |format|
+      format.html { redirect_to posts_path }
+      format.json { render json: @post.errors, status: :unprocessable_entity }
+    end            
   end
+end
 
 
 == Usage
