@@ -2,23 +2,23 @@
 // All this logic will automatically be available in application.js.
 var exceptionLineChart;
 
-// Initializing dashboard components
-// function load_dashboard_UI_components() {
+$(document).ready(function() {
+  // Initializing dashboard components
 
-// AJAX Request
-var request = $.ajax({
-  url: "/rscratch/dashboard/index.json",
-  method: "GET",
-  dataType: "json",
+  // AJAX Request
+  var request = $.ajax({
+    url: "/rscratch/dashboard/index.json",
+    method: "GET",
+    dataType: "json",
+  });
+  request.done(function( data, textStatus, jqXHR ) {
+    load_exception_line_chart(data);
+  });
+  request.fail(function( jqXHR, textStatus ) {
+    alert("Sorry Something Went Wrong");
+    // Materialize.toast('Sorry somethnig went wrong while crunching data, please try after sometime!', 5000);
+  });
 });
-request.done(function( data, textStatus, jqXHR ) {
-  load_exception_line_chart(data);
-});
-request.fail(function( jqXHR, textStatus ) {
-  alert("Sorry Something Went Wrong");
-  // Materialize.toast('Sorry somethnig went wrong while crunching data, please try after sometime!', 5000);
-});
-// }
 
 
 function load_exception_line_chart(data){
@@ -68,7 +68,7 @@ function load_exception_line_chart(data){
         tooltipTitleFontFamily: "'Roboto','Helvetica Neue', 'Helvetica', 'Arial', sans-serif",// String - Tooltip title font declaration for the scale label    
         scaleFontSize: 12,// Number - Scale label font size in pixels   
         scaleFontStyle: "normal",// String - Scale label font weight style    
-        scaleFontColor: "#fff",// String - Scale label font colour
+        scaleFontColor: "#ffffff",// String - Scale label font colour
         tooltipEvents: ["mousemove", "touchstart", "touchmove"],// Array - Array of string names to attach tooltip events   
         tooltipFillColor: "rgba(255,255,255,0.8)",// String - Tooltip background colour   
         tooltipTitleFontFamily: "'Roboto','Helvetica Neue', 'Helvetica', 'Arial', sans-serif",// String - Tooltip title font declaration for the scale label    
@@ -77,7 +77,7 @@ function load_exception_line_chart(data){
         tooltipTitleFontFamily: "'Roboto','Helvetica Neue', 'Helvetica', 'Arial', sans-serif",// String - Tooltip title font declaration for the scale label    
         tooltipTitleFontSize: 14,// Number - Tooltip title font size in pixels    
         tooltipTitleFontStyle: "bold",// String - Tooltip title font weight style   
-        tooltipTitleFontColor: "#000",// String - Tooltip title font colour   
+        tooltipTitleFontColor: "#000000",// String - Tooltip title font colour   
         tooltipYPadding: 8,// Number - pixel width of padding around tooltip text   
         tooltipXPadding: 16,// Number - pixel width of padding around tooltip text    
         tooltipCaretSize: 10,// Number - Size of the caret on the tooltip   
