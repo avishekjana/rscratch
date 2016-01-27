@@ -8,8 +8,9 @@
     %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css", :rel => "stylesheet"}
     / Compiled and minified JavaScript
     %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"}
-    = stylesheet_link_tag    "application", "rscratch/dashboard", :media => "all"
-    = javascript_include_tag "application", "rscratch/Chart.min.js", "rscratch/dashboard.js"
+    = stylesheet_link_tag "application", "rscratch/style", :media => "all"
+    = javascript_include_tag "application", "rscratch/Chart.min.js"
+    = javascript_include_tag params[:controller]
     = csrf_meta_tags
   %body
     .navbar-fixed
@@ -19,11 +20,11 @@
             %li
               %h1.logo-wrapper{:style => ""}
                 %a{:href => "/rscratch"}
-                  %img{:alt => "Rscratch", :height => "55", :src => "http://rscratch.github.io/rscratch_logo.png"}                 
+                  %img{:alt => "Rscratch", :height => "55", :src => "http://rscratch.github.io/rscratch_logo.png"}
                   %span.logo-text RScratch
           %ul#nav-mobile.left.hide-on-med-and-down.grey-text
             %li
-              %a.grey-text.text-darken-2{:href => "#"} EXCEPTIONS
+              %a.grey-text.text-darken-2{:href => exceptions_path} EXCEPTIONS
             %li
               %a.grey-text.text-darken-2{:href => "#"} CONFIGURATIONS
           %ul.right.hide-on-med-and-down
