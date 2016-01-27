@@ -3,7 +3,7 @@ PATH
   specs:
     rscratch (0.0.1)
       haml
-      smart_listing (~> 1.1.0)
+      smart_listing
 
 GEM
   remote: https://rubygems.org/
