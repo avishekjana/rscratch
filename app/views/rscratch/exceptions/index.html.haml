@@ -1,2 +1,96 @@
-%h1Exceptions#index
+:javascript
+  $(document).ready(function(){
+    $('ul.tabs').tabs();
+  });
 
+.row
+  .col.s4.p0.z-depth-1.fixed-sidebar
+    %ul.tabs.z-depth-1.light-blue
+      %li.tab.col.s6
+        %a.white-text.waves-effect.waves-light.active{:href => "#test1"} New
+      %li.tab.col.s6
+        %a.white-text.waves-effect.waves-light{:href => "#test2"} Resolved
+    #test1.p0
+      %ul.collection
+        %li.collection-item.avatar.min-height-70
+          %i.material-icons.circle folder
+          %span.title Title
+          %p
+            First Line
+          %a.secondary-content{:href => "#!"}
+            %i.material-icons grade
+        %li.collection-item.avatar.min-height-70
+          %i.material-icons.circle folder
+          %span.title Title
+          %p
+            First Line
+          %a.secondary-content{:href => "#!"}
+            %i.material-icons grade
+        %li.collection-item.avatar.min-height-70
+          %i.material-icons.circle folder
+          %span.title Title
+          %p
+            First Line
+          %a.secondary-content{:href => "#!"}
+            %i.material-icons grade
+        %li.collection-item.avatar.min-height-70
+          %i.material-icons.circle folder
+          %span.title Title
+          %p
+            First Line
+          %a.secondary-content{:href => "#!"}
+            %i.material-icons grade                  
+        %li.collection-item.avatar.min-height-70
+          %i.material-icons.circle folder
+          %span.title Title
+          %p
+            First Line
+          %a.secondary-content{:href => "#!"}
+            %i.material-icons grade
+        %li.collection-item.avatar.min-height-70
+          %i.material-icons.circle folder
+          %span.title Title
+          %p
+            First Line
+          %a.secondary-content{:href => "#!"}
+            %i.material-icons grade
+        %li.collection-item.avatar.min-height-70
+          %i.material-icons.circle.green insert_chart
+          %span.title Title
+          %p
+            First Line
+          %a.secondary-content{:href => "#!"}
+            %i.material-icons grade
+        %li.collection-item.avatar.min-height-70
+          %i.material-icons.circle.red play_arrow
+          %span.title Title
+          %p
+            First Line
+          %a.secondary-content{:href => "#!"}
+            %i.material-icons grade
+        %li.collection-item.avatar.min-height-70
+          %i.material-icons.circle folder
+          %span.title Title
+          %p
+            First Line
+          %a.secondary-content{:href => "#!"}
+            %i.material-icons grade
+        %li.collection-item.avatar.min-height-70
+          %i.material-icons.circle.green insert_chart
+          %span.title Title
+          %p
+            First Line
+          %a.secondary-content{:href => "#!"}
+            %i.material-icons grade
+        %li.collection-item.avatar.min-height-70
+          %i.material-icons.circle.red play_arrow
+          %span.title Title
+          %p
+            First Line
+          %a.secondary-content{:href => "#!"}
+            %i.material-icons grade            
+
+    #test2.col.s12 Test 2
+
+  .col.s8{:style=>"float:right"}
+    %h2 Hello
