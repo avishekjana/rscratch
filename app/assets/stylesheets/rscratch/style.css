@@ -18,9 +18,19 @@ header .brand-logo img {
 h1 span.logo-text {
     display: none;
 }
+.p0{ padding: 0px !important; }
 .p5{ padding: 5px; }
 .p10{ padding: 10px; }
 .p20{ padding: 20px; }
+
 .font-12{ font-size: 12px; }
 .font-14{ font-size: 14px; }
 .font-16{ font-size: 16px; }
+
+.min-height-70{ min-height: 70px !important; }
+
+.fixed-sidebar{
+  position: fixed;
+  height: calc(100% + 10px);
+  overflow-y:auto;
+}
