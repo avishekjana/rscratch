@@ -1,11 +1,19 @@
-- unless smart_listing.empty?
+- unless smart_listing.empty?        
   %ul.collection
-    - smart_listing.collection.each do |o|
+    - smart_listing.collection.each do |object|
       %li.collection-item.avatar.min-height-70
-        %i.material-icons.circle folder
-        %span.title=o.message
-        %p=o.exception
-        %a.secondary-content{:href => "#!"}
-          %i.material-icons grade
+        %i.material-icons.circle.red.font-24 bug_report
+        %span.secondary-content.label=object.total_occurance_count
+        %h6.margin-t-0.truncate=object.message
+        %h6.margin-t-0.truncate.font-11=object.exception
+        %h6.margin-t-0
+          %span.label.orange=object.app_environment
+          %span.grey-text="#{object.controller}##{object.action}"
+          %span.font-12.right="#{time_ago_in_words(object.updated_at)} ago"
+  %center
+    = smart_listing.paginate
+    = smart_listing.pagination_per_page_links 
+  %br       
+  %br       
 - else
   %p.warning No records!
