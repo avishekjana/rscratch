@@ -38,6 +38,7 @@ h1 span.logo-text {
   position: fixed;
   height: calc(100% - 50px);
   overflow-y:auto;
+  width:inherit
 }
 
 span.badge {
