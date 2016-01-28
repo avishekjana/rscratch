@@ -1,5 +1,5 @@
 - unless smart_listing.empty?        
-  %ul.collection
+  %ul.collection.margin-t-0
     - smart_listing.collection.each do |object|
       %li.collection-item.avatar.min-height-70
         %i.material-icons.circle.red.font-24 bug_report
@@ -13,6 +13,8 @@
   %center
     = smart_listing.paginate
     = smart_listing.pagination_per_page_links 
+  %br
+  %br
   %br       
   %br       
 - else
