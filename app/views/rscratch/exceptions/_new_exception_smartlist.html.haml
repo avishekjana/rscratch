@@ -1,0 +1,11 @@
+- unless smart_listing.empty?
+  %ul.collection
+    - smart_listing.collection.each do |o|
+      %li.collection-item.avatar.min-height-70
+        %i.material-icons.circle folder
+        %span.title=o.message
+        %p=o.exception
+        %a.secondary-content{:href => "#!"}
+          %i.material-icons grade
+- else
+  %p.warning No records!
