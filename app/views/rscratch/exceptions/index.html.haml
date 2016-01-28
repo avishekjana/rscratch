@@ -3,8 +3,6 @@
     $('ul.tabs').tabs();
   });
 
-
-
 .row
   .col.s4.p0.z-depth-1.fixed-sidebar
     %ul.tabs.z-depth-1.light-blue
@@ -13,9 +11,10 @@
       %li.tab.col.s6
         %a.white-text.waves-effect.waves-light{:href => "#test2"} Resolved
     #test1.p0
-      = smart_listing_render :exceptions            
-    #test2.col.s12 
-      Test 2
+      =# smart_listing_controls_for(:exceptions, {class: "form-inline text-right"}) do
+      =# text_field_tag :filter, '', class: "search form-control", placeholder: "Search...", autocomplete: :off    
+      = smart_listing_render :exceptions
+    #test2.p0 Test 2
 
   .col.s8{:style=>"float:right"}
-    %h2 Hello
+    %h5 Exception Details
