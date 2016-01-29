@@ -1,21 +1,21 @@
 - unless smart_listing.empty?        
   %ul.collection.margin-t-0
     - smart_listing.collection.each do |object|
-      %li.collection-item.avatar.min-height-70
-        %i.material-icons.circle.red.font-24 bug_report
+      %li.collection-item.avatar.min-height-70.waves-effect.width-100.exception-item{:class=>"excp-item-#{object.id}","data-exception-id"=>object.id, "data-exception-message"=>object.message, "data-exception-date"=>object.updated_at.strftime("%d-%m-%Y, %I:%M %p"), "data-exception-total-count"=>object.total_occurance_count, "data-exception-new-count"=>object.new_occurance_count}
+        %i.margin-t-5.material-icons.circle.red.font-24 bug_report
         %span.secondary-content.label=object.total_occurance_count
-        %h6.margin-t-0.truncate=object.message
-        %h6.margin-t-0.truncate.font-11=object.exception
-        %h6.margin-t-0
+        %h6.grey-text.text-darken-4.margin-t-0.truncate=object.message
+        %h6.grey-text.text-darken-3.margin-t-0.truncate.font-11=object.exception
+        %h6.margin-0
           %span.label.orange=object.app_environment
           %span.grey-text="#{object.controller}##{object.action}"
-          %span.font-12.right="#{time_ago_in_words(object.updated_at)} ago"
+          %span.grey-text.font-11.right="#{time_ago_in_words(object.updated_at)} ago"
   %center
     = smart_listing.paginate
-    = smart_listing.pagination_per_page_links 
-  %br
-  %br
-  %br       
-  %br       
+    = smart_listing.pagination_per_page_links    
+  %br    
+  %br    
+  %br    
+  %br    
 - else
   %p.warning No records!
