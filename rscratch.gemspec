@@ -18,6 +18,7 @@ Gem::Specification.new do |s|
 
   s.add_dependency "smart_listing"
   s.add_dependency "haml"
+  s.add_dependency 'ejs'
 
   s.add_development_dependency "sqlite3"
   s.add_development_dependency "haml-rails" #To use haml generator
