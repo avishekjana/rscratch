@@ -12,5 +12,11 @@ module Rscratch
         format.json { render json: @exceptions }
       end      
     end
+    def show
+      @excp = Rscratch::Exception.find(params[:id])
+      @log = @excp.exception_logs.order("created_at desc").page(params[:page]).per(1)
+      @historical_data = @excp.exception_logs.select("count(id) as exception_count, date(created_at) as date").group("date(created_at)").order("date(created_at)").last(30)
+      rescue Exception => @error          
+    end    
   end
 end
