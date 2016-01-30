@@ -1,41 +1,41 @@
-= RScratch
+# RScratch
 
 By Avishek Jana
 
-== Installation
+## Installation
 
 Add this line to your application's Gemfile:
-
-    gem 'rscratch'
-
+```ruby
+  gem 'rscratch'
+```
 And then execute:
-
-    $ bundle install
-
+```ruby
+  $ bundle install
+``
 Or install it yourself as:
-
-    $ gem install rscratch
-
+```ruby
+  $ gem install rscratch
+```
 After you install RScratch, you need to run the generator:
-
-    $ rails g rscratch:install
+```ruby
+  $ rails g rscratch:install
+```
 
 The generator will create few migration files, a initializer file, and routes to access Rscratch WebUI. It is imperative that you take a look at it. When you are done, you are ready to run migration using the following command:
-
-    $ rake db:migrate
-
+```ruby
+  $ rake db:migrate
+```
 You should restart your application after installing RScratch gem.
 
-== Usage
+## Usage
 Add this following line in rescue block of your your code. An example is given below
-
-
+```ruby
   Rscratch::Exception.log e,request
-
+```
 
 An example is given below
 
-
+```ruby
   def create
     begin
       @post = Post.new(params[:post])
@@ -52,25 +52,29 @@ An example is given below
       end            
     end
   end
+```
 
-
-== WebUI
+## WebUI
 Now everything looks sparky. Rscratch comes bundled with a web UI to track exceptions raised from your application. Go to the following URL to access it.
 
-  http:// {YOUR_APP_URL}/rscratch/
+  http://{YOUR_APP_URL}/rscratch/
 
-Ohh!! you may be asked for username and password once you visit this page. These credentials are by default in the initializer file. 
+Ohh!! you may be asked for username and password once you visit this page. These credentials are by default set in the initializer file. 
+```ruby
   username: admin 
   password: admin123
+``
 To change this credentials check rsctarch initializer file in the following directory
+```ruby
   config/initializers/rscratch.rb
+```
 
-== Contributing
+## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/avishekjana/rscratch. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
 
 
-== License
+## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
 
