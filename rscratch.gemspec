@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.email       = ["avishekjana.it@gmail.com"]
   s.homepage    = "https://github.com/avishekjana/rscratch"
   s.description = s.summary = "RScratch - Exception and log processing solution for Ruby on Rails application"
-  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.rdoc"]
+  s.files = Dir["{app,config,db,lib}/**/*"] + ["MIT-LICENSE", "Rakefile", "README.md"]
   s.test_files = Dir["test/**/*"]
 
   # s.add_dependency "jquery-rails"
