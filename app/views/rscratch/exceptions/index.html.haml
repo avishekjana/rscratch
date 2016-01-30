@@ -14,29 +14,27 @@
       =# smart_listing_controls_for(:exceptions, {class: "form-inline text-right"}) do
       =# text_field_tag :filter, '', class: "search form-control", placeholder: "Search...", autocomplete: :off    
       = smart_listing_render :exceptions
-    #test2.p0 Under development
+    #test2.p0 Coming soon
 
   .col.s8.p0{:style=>"float:right"}
-    .row.p10.margin-0
-      %span.font-20.exception-message.font-weight-300
-      %span.right.font-11.exception-date
-    .row.exception-summary
-      .col.s8
-        .card.z-depth-1
-          .card-panel{:style=>"min-height:280px !important"}
-            .progress-loader
-            
-      .col.s4
-        .card.z-depth-2
-          .card-content.white-text.indigo.border-radius-0
-            .card-title.font-34.exception-total-count
-          .card-action.indigo.darken-1.white-text.p10.font-weight-300
-            Total occurances
-        .card.z-depth-2
-          .card-content.white-text.teal.border-radius-0
-            .card-title.font-34.exception-new-count
-          .card-action.teal.darken-1.white-text.p10.font-weight-300
-            Occurances since last resolved.
+    .card#log-page-header.exception-summary.margin-0
+      .card-image.waves-effect.waves-block.waves-light.red
+        %canvas#log-count-canvas{:height => "89","chart-legend" => "true"}
+      .card-content
+        .row.margin-0
+          .col.s8
+            %h6.card-title.font-18.grey-text.text-darken-4.exception-message
+            %p.medium-small.grey-text 
+              %h6.margin-t-0.grey-text.exception-raw
+              %h6.margin-t-0.grey-text.ex-controller
+              %h6.margin-t-0.grey-text.exception-date
+          .col.s2.center-align
+            %h4.card-title.grey-text.text-darken-4.exception-total-count
+            %p.medium-small.grey-text Total Occurances         
+          .col.s2.center-align
+            %h4.card-title.grey-text.text-darken-4.exception-new-count
+            %p.medium-small.grey-text Since Last Resolved        
+          .col.s1  
     .exception-container.progress-loader
       .valign-wrappe
         %h5.grey-text.font-weight-300.center-align.text-lighten-2 No exception selected
