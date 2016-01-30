@@ -1,0 +1,53 @@
+<%
+
+  var entityMap = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': '&quot;',
+    "'": '&#39;',
+    "/": '&#x2F;'
+  };
+  function escapeHtml(string) {
+    return String(string).replace(/[&<>"'\/]/g, function (s) {
+      return entityMap[s];
+    });
+  }
+  var created_at = new Date(response.created_at);
+  var created_at = created_at.format("dd-mm-yyyy hh:MM TT","GMT");
+
+  var updated_at = new Date(response.updated_at);
+  var updated_at = updated_at.format("dd-mm-yyyy hh:MM TT","GMT");  
+%>
+<div class="row">
+  <div class="col s3">First seen at</div>
+  <div class="col s9"><%= created_at %></div>
+</div>
+<div class="row">
+  <div class="col s3">Last seen at</div>
+  <div class="col s9"><%= updated_at %></div>
+</div>
+<div class="row">
+  <div class="col s3">Occurrences</div>
+  <div class="col s9"><%= response.total_occurance_count %></div>
+</div>
+<div class="row">
+  <div class="col s3">Description</div>
+  <div class="col s9"> <%= escapeHtml(response.log.description) %></div>
+</div>
+<div class="row">
+  <div class="col s3">Environment</div>
+  <div class="col s9"><%= response.app_environment %></div>
+</div>
+<div class="row">
+  <div class="col s3">Request Method</div>
+  <div class="col s9"><%= response.log.request_method %></div>
+</div>
+<div class="row">
+  <div class="col s3">Client IP</div>
+  <div class="col s9"><%= response.log.client_ip %></div>
+</div>
+<div class="row">
+  <div class="col s3">User Agent</div>
+  <div class="col s9"><%= response.log.user_agent %></div>
+</div>
