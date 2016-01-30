@@ -23,15 +23,15 @@ Or install it yourself as:
 
 After you install RScratch, you need to run the generator:
 
-    $ rake rscratch:install:migrations
+    $ rails g rscratch:install
 
-The generator will create few migration files, will contain gem data. It is imperative that you take a look at it. When you are done, you are ready to run migration using the following command:
+The generator will create few migration files, a initializer file, and routes to access Rscratch WebUI. It is imperative that you take a look at it. When you are done, you are ready to run migration using the following command:
 
     $ rake db:migrate
 
 You should restart your application after installing RScratch gem.
 
-== Integration
+== Usage
 Add this following line in rescue block of your your code. An example is given below
 
 
@@ -59,14 +59,13 @@ An example is given below
   end
 
 
-== Usage
-Mount the RScratch in your application route file:
+== WebUI
+Now everything looks sparky. Rscratch comes bundled with a web UI to track exceptions raised from your application. Go to the following URL to access it.
 
-mount Rscratch::Engine => "/rscratch"
+  http:// {YOUR_APP_URL}/rscratch/
 
-Now everything looks sparky. Just go to the following path to track exceptions raised from your application .
-
-http://{YOUR_APP_URL}/rscratch/
+Ohh!! you may be asked for username and password once you visit this page. So username is by default set to `admin` and password is `admin123`. To change this credentials check rsctarch initializer file in the following directory
+  config/initializers/rscratch.rb
 
 == Contributing
 
