@@ -1,6 +1,6 @@
 # RScratch
 
-By Avishek Jana
+![Rscratch with its Web UI](http://rscratch.github.io/rscratch_logo.pn)
 
 ## Installation
 
@@ -11,7 +11,7 @@ Add this line to your application's Gemfile:
 And then execute:
 ```ruby
   $ bundle install
-``
+```
 Or install it yourself as:
 ```ruby
   $ gem install rscratch
@@ -63,7 +63,7 @@ Ohh!! you may be asked for username and password once you visit this page. These
 ```ruby
   username: admin 
   password: admin123
-``
+```
 To change this credentials check rsctarch initializer file in the following directory
 ```ruby
   config/initializers/rscratch.rb
