@@ -1,6 +1,6 @@
 # RScratch
 
-![Rscratch with its Web UI](http://rscratch.github.io/rscratch_logo.pn)
+![Rscratch with its Web UI](./doc/rscratch_logo.png)
 
 ## Installation
 
