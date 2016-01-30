@@ -78,6 +78,12 @@ span.label {
     border-right: 4px solid #29B6F6;
 }
 
+.tabs .indicator {
+    position: absolute;
+    bottom: 0;
+    height: 2px;
+    background-color: #b2ebf2 !important;
+    will-change: left, right; }
 #log-page-header .card-image {
     height: 250px;
 }
