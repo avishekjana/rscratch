@@ -31,7 +31,8 @@ h1 span.logo-text {
 .font-11{ font-size: 11px; }
 .font-12{ font-size: 12px; }
 .font-14{ font-size: 14px; }
-.font-16{ font-size: 16px; }
+.font-16{ font-size: 16px !important; }
+.font-18{ font-size: 18px !important; }
 .font-20{ font-size: 20px !important; }
 .font-24{ font-size: 24px !important; }
 .font-34{ font-size: 34px !important; }
@@ -75,4 +76,20 @@ span.label {
 .collection .collection-item.selected {
     background: #E1F5FE none repeat scroll 0% 0%;
     border-right: 4px solid #29B6F6;
+}
+
+#log-page-header .card-image {
+    height: 250px;
+}
+#log-page-header .card-content {
+    margin-top: -30px;
+}
+#log-page-header .card-profile-image {
+    width: 110px;
+    position: absolute;
+    top: 190px;
+    z-index: 1;
+    left: 40px;
+    cursor: pointer;
+    margin: 0px;
 }
