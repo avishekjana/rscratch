@@ -2,6 +2,8 @@
 
 By [Avishek Jana](https://github.com/avishekjana)
 
+[![Gem Version](https://badge.fury.io/rb/rscratch.svg)](https://badge.fury.io/rb/rscratch)
+
 RScratch is a Ruby on Rails gem that helps you to manage bugs in your application. Think RScratch as a self-hosted bug tracker alternative you can easily integrate into your site.
 
 ### Features
