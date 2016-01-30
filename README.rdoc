@@ -6,12 +6,7 @@ By Avishek Jana
 
 Add this line to your application's Gemfile:
 
-
     gem 'rscratch'
-
-or
-
-    gem 'rscratch', :git => 'git://github.com/avishekjana/rscratch.git'
 
 And then execute:
 
@@ -64,7 +59,10 @@ Now everything looks sparky. Rscratch comes bundled with a web UI to track excep
 
   http:// {YOUR_APP_URL}/rscratch/
 
-Ohh!! you may be asked for username and password once you visit this page. So username is by default set to `admin` and password is `admin123`. To change this credentials check rsctarch initializer file in the following directory
+Ohh!! you may be asked for username and password once you visit this page. These credentials are by default in the initializer file. 
+  username: admin 
+  password: admin123
+To change this credentials check rsctarch initializer file in the following directory
   config/initializers/rscratch.rb
 
 == Contributing
