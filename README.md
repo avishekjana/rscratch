@@ -76,7 +76,14 @@ Ohh!! you may be asked for username and password once you visit this page. These
 ```
 To change this credentials check rsctarch initializer file in the following directory
 ```ruby
-  config/initializers/rscratch.rb
+  #config/initializers/rscratch.rb
+  Rscratch.configure do |config|
+    config.authenticate = Proc.new do
+      authenticate_or_request_with_http_basic do |username, password|
+       username == "admin" && password == "admin123"
+      end
+    end
+  end  
 ```
 
 ## Contributing
