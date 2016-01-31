@@ -16,12 +16,10 @@ Gem::Specification.new do |s|
 
   # s.add_dependency "jquery-rails"
 
-  s.add_runtime_dependency "smart_listing"
-  s.add_runtime_dependency "haml"
-  s.add_runtime_dependency 'ejs'
-  s.add_runtime_dependency 'jbuilder'
-
-  s.add_development_dependency "sqlite3"
-  s.add_development_dependency "haml-rails" #To use haml generator
+  s.add_dependency "smart_listing"
+  s.add_dependency "haml"
+  s.add_dependency 'ejs'
+  s.add_dependency 'jbuilder'
+  s.add_dependency "haml-rails" #To use haml generator
 
 end
