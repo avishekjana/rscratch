@@ -2,7 +2,8 @@
 // All this logic will automatically be available in application.js.
 var exceptionLineChart;
 
-$(document).ready(function() {
+function load_dashboard_UI_components() {
+  // $(document).ready(function() {
   // Initializing dashboard components
 
   // AJAX Request
@@ -18,7 +19,7 @@ $(document).ready(function() {
     alert("Sorry Something Went Wrong");
     // Materialize.toast('Sorry somethnig went wrong while crunching data, please try after sometime!', 5000);
   });
-});
+}
 
 
 function load_exception_line_chart(data){
