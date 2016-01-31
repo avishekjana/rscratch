@@ -8,8 +8,7 @@
     %link{:href => "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css", :rel => "stylesheet"}
     / Compiled and minified JavaScript
     = stylesheet_link_tag "rscratch/application", :media => "all"
-    = javascript_include_tag "rscratch/application", "rscratch/Chart.min.js", "rscratch/templates/loader", "rscratch/templates/exception_overview"
-    = javascript_include_tag params[:controller]
+    = javascript_include_tag "rscratch/application"
     %script{:src => "https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"}
     = csrf_meta_tags
   %body
