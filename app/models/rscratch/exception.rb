@@ -2,7 +2,7 @@ module Rscratch
   class Exception < ActiveRecord::Base
     
     if Rails::VERSION::MAJOR == 3
-      attr_accessible :action, :app_environment, :controller, :exception, :message, :new_occurance_count, :total_occurance_count
+      attr_accessible :action, :app_environment, :controller, :exception, :message, :new_occurance_count, :total_occurance_count, :status
     end
     
     STATUS = %w(new under_development resolved)
@@ -16,7 +16,7 @@ module Rscratch
     validates :controller      , presence: true
     validates :action          , presence: true
     validates :app_environment , presence: true
-    validates :status, presence: true, :inclusion => {:in => STATUS}
+    validates :status          , presence: true, :inclusion => {:in => STATUS}
                       
     ### => Model Scopes
     scope :by_exception, lambda {|exc|where(["exception=?", exc])}                      
@@ -24,20 +24,12 @@ module Rscratch
     scope :by_controller, lambda {|con|where(["controller=?", con])}                      
     scope :by_action, lambda {|act|where(["action=?", act])}                      
     scope :by_environment, lambda {|env|where(["app_environment=?", env])}   
+    scope :by_status, lambda {|status|where(["status=?", status])}   
 
     # => Dynamic methods for exception statuses
     STATUS.each do |status|
       define_method "#{status}?" do
         self.status == status
-      end
-    end
-
-    # => Dynamically defining these custom finder methods
-    class << self
-      STATUS.each do |status|
-        define_method "#{status}" do
-          where(["status=?", status])
-        end
       end
     end
 
