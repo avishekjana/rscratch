@@ -1,6 +1,9 @@
 module Rscratch
   class ExceptionLog < ActiveRecord::Base
-    attr_accessible :backtrace, :client_ip, :description, :exception_id, :parameters, :request_method, :request_url, :status, :user_agent
+
+    if Rails::VERSION::MAJOR == 3
+      attr_accessible :backtrace, :client_ip, :description, :exception_id, :parameters, :request_method, :request_url, :status, :user_agent
+    end    
     ### => Model Relations
     belongs_to :exception
 
@@ -25,7 +28,15 @@ module Rscratch
     scope :by_exception, lambda {|exc_id|where(["exception_id=?", exc_id])}                      
     scope :unresolved_exceptions, lambda {|last_id|where(["id >?", last_id])}                      
     scope :resolved, lambda {where(["status=?", "resolved"])}                      
+    
+    def development!
+      update_attribute(:status, 'under_development')
+    end
 
+    def resolve!
+      update_attribute(:status, 'resolved')
+    end
+    
     private
 
     def calculate_exception_count
