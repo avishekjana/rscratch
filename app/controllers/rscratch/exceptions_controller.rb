@@ -5,7 +5,8 @@ module Rscratch
     helper  SmartListing::Helper    
     def index
       @exceptions = Rscratch::Exception.order("updated_at desc")
-      smart_listing_create :exceptions, @exceptions, partial: "rscratch/exceptions/new_exception_smartlist"
+      smart_listing_create :exceptions, @exceptions.new, partial: "rscratch/exceptions/exception_smartlist"
+      smart_listing_create :resolved_exceptions, @exceptions.resolved, partial: "rscratch/exceptions/exception_smartlist"
       respond_to do |format|
         format.html # index.html.erb
         format.js
