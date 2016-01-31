@@ -14,7 +14,8 @@
       =# smart_listing_controls_for(:exceptions, {class: "form-inline text-right"}) do
       =# text_field_tag :filter, '', class: "search form-control", placeholder: "Search...", autocomplete: :off    
       = smart_listing_render :exceptions
-    #resolved-ex.p0 Coming soon
+    #resolved-ex.p0
+      = smart_listing_render :resolved_exceptions
 
   .col.s8.p0{:style=>"float:right"}
     .card#log-page-header.exception-info.margin-0
