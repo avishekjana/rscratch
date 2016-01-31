@@ -1,6 +1,12 @@
 module Rscratch
   class Exception < ActiveRecord::Base
-    attr_accessible :action, :app_environment, :controller, :exception, :message, :new_occurance_count, :total_occurance_count
+    
+    if Rails::VERSION::MAJOR == 3
+      attr_accessible :action, :app_environment, :controller, :exception, :message, :new_occurance_count, :total_occurance_count
+    end
+    
+    STATUS = %w(new under_development resolved)
+
     ### => Model Relations
     has_many :exception_logs, :dependent => :destroy
 
@@ -10,6 +16,7 @@ module Rscratch
     validates :controller      , presence: true
     validates :action          , presence: true
     validates :app_environment , presence: true
+    validates :status, presence: true, :inclusion => {:in => STATUS}
                       
     ### => Model Scopes
     scope :by_exception, lambda {|exc|where(["exception=?", exc])}                      
@@ -17,6 +24,22 @@ module Rscratch
     scope :by_controller, lambda {|con|where(["controller=?", con])}                      
     scope :by_action, lambda {|act|where(["action=?", act])}                      
     scope :by_environment, lambda {|env|where(["app_environment=?", env])}   
+
+    # => Dynamic methods for exception statuses
+    STATUS.each do |status|
+      define_method "#{status}?" do
+        self.status == status
+      end
+    end
+
+    # => Dynamically defining these custom finder methods
+    class << self
+      STATUS.each do |status|
+        define_method "#{status}" do
+          where(["status=?", status])
+        end
+      end
+    end
 
     # Log an exception
     def self.log(exc,request) 
@@ -44,7 +67,8 @@ module Rscratch
                                       :message          => exc.message,
                                       :controller       => _controller,
                                       :action           => _action,
-                                      :app_environment  => _env)
+                                      :app_environment  => _env,
+                                      :status           => "new")
         return _new_excp
       end
     end
