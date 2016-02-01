@@ -29,7 +29,7 @@ module Rscratch
     scope :unresolved_exceptions, lambda {|last_id|where(["id >?", last_id])}                      
     scope :resolved, lambda {where(["status=?", "resolved"])}                      
     
-    def development!
+    def start_development!
       update_attribute(:status, 'under_development')
     end
 
@@ -37,6 +37,18 @@ module Rscratch
       update_attribute(:status, 'resolved')
     end
     
+    # Sets Log instance attributes.
+    def self.set_attributes_for exc, request
+      self.description    = exc.inspect,
+      self.backtrace      = exc.backtrace.join("\n"),
+      self.request_url    = request.original_url,
+      self.request_method = request.request_method,
+      self.parameters     = request.filtered_parameters,
+      self.user_agent     = request.user_agent,
+      self.client_ip      = request.remote_ip,
+      self.status         = "new"   
+    end    
+
     private
 
     def calculate_exception_count

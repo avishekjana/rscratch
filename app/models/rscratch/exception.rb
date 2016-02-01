@@ -35,8 +35,8 @@ module Rscratch
 
     # Log an exception
     def self.log(exc,request) 
-      _exception = self.find_or_add_exception(exc,request.filtered_parameters["controller"].camelize,request.filtered_parameters["action"],Rails.env.camelize)
-      _excp_log = ExceptionLog.new(
+      _exception = self.find_or_create(exc,request.filtered_parameters["controller"].camelize,request.filtered_parameters["action"],Rails.env.camelize)
+      _log = ExceptionLog.new(
                                   :description         => exc.inspect,
                                   :backtrace           => exc.backtrace.join("\n"),
                                   :request_url         => request.original_url,
@@ -45,24 +45,32 @@ module Rscratch
                                   :user_agent          => request.user_agent,
                                   :client_ip           => request.remote_ip,
                                   :status              => "new")
-      _exception.exception_logs << _excp_log
+      _exception.exception_logs << _log
       return _exception
     end
 
     # Log unique exceptions
-    def self.find_or_add_exception exc,_controller,_action,_env              
+    def self.find_or_create exc,_controller,_action,_env              
       _excp = Exception.by_exception(exc.class).by_message(exc.message).by_controller(_controller).by_action(_action).by_environment(_env)
       if _excp.present?
         return _excp.first
       else
-        _new_excp = Exception.create( :exception        => exc.class,
-                                      :message          => exc.message,
-                                      :controller       => _controller,
-                                      :action           => _action,
-                                      :app_environment  => _env,
-                                      :status           => "new")
-        return _new_excp
+        _excp = Exception.new
+        _excp.set_attributes_for exc, _controller, _action, _env
+        _excp.save!
+        _excp
       end
     end
+
+    # Sets Exception instance attributes.
+    def set_attributes_for exc, _controller, _action, _env
+      self.exception = exc.class
+      self.message = exc.message
+      self.controller = _controller
+      self.action = _action
+      self.app_environment = _env
+      self.status = "new"
+    end
+
   end
 end
