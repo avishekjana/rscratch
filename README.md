@@ -24,10 +24,6 @@ And then execute:
 ```ruby
   $ bundle install
 ```
-Or install it yourself as:
-```ruby
-  $ gem install rscratch
-```
 After you install RScratch, you need to run the generator:
 ```ruby
   $ rails g rscratch:install
@@ -71,12 +67,12 @@ Now everything looks sparky. Rscratch comes bundled with a web UI to track excep
 
   http://{YOUR_APP_URL}/rscratch/
 
-Ohh!! you may be asked for username and password once you visit this page. These credentials are by default set in the initializer file. 
+Ohh!! you may be asked for username and password once you visit this page. Default credentials are given below. 
 ```ruby
   username: admin 
   password: admin123
 ```
-To change this credentials check rsctarch initializer file in the following directory
+To change this credentials check rsctarch initializer file.
 ```ruby
   #config/initializers/rscratch.rb
   Rscratch.configure do |config|
