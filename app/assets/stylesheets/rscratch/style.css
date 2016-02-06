@@ -22,9 +22,12 @@ h1 span.logo-text {
 .p5{ padding: 5px !important; }
 .p10{ padding: 10px !important; }
 .p20{ padding: 20px; }
+.padding-r10{ padding-right:10px !important; }
 
 .margin-t-0{ margin-top:0px !important; }
 .margin-t-5{ margin-top:5px !important; }
+.margin-t-10{ margin-top:10px !important; }
+.margin-b-0{ margin-bottom:0px !important; }
 .margin-0{ margin:0px !important; }
 
 .font-10{ font-size: 10px; }
@@ -85,10 +88,10 @@ span.label {
     background-color: #b2ebf2 !important;
     will-change: left, right; }
 #log-page-header .card-image {
-    height: 250px;
+    height: 180px;
 }
 #log-page-header .card-content {
-    margin-top: -30px;
+    /*margin-top: -10px;*/
 }
 #log-page-header .card-profile-image {
     width: 110px;
