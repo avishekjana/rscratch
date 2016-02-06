@@ -5,7 +5,7 @@
 
 .row
   .col.s4.p0.fixed-sidebar.z-depth-1
-    %ul.tabs.light-blue
+    %ul.tabs.teal
       %li.tab.col.s6
         %a.white-text.waves-effect.waves-light.active{:href => "#new-ex"} New
       %li.tab.col.s6
@@ -18,24 +18,35 @@
       = smart_listing_render :resolved_exceptions
 
   .col.s8.p0{:style=>"float:right"}
-    .card#log-page-header.exception-info.margin-0
-      .card-image.waves-effect.waves-block.waves-light.grey
-        %canvas#log-count-canvas{:height => "89","chart-legend" => "true"}
-      .card-content
+    .card#log-page-header.exception-info.margin-0.waves-effect.waves-block.waves-light
+      / .card-image.grey.lighten-4
+      /   %canvas#log-count-canvas{:height => "182", :width=>"600"}
+      .card-content.p0.blue.border-radius-0
         .row.margin-0
-          .col.s8
-            %h6.card-title.font-18.grey-text.text-darken-4.exception-message
-            %p.medium-small.grey-text 
-              %h6.margin-t-0.grey-text.exception-raw
-              %h6.margin-t-0.grey-text.ex-controller
-              %h6.margin-t-0.grey-text.exception-date
-          .col.s2.center-align
-            %h4.card-title.grey-text.text-darken-4.exception-total-count
-            %p.medium-small.grey-text Total Occurrences
-          .col.s2.center-align
-            %h4.card-title.grey-text.text-darken-4.exception-new-count
-            %p.medium-small.grey-text Since Last Resolved        
-          .col.s1  
+          .col.l8.s12
+            %h6.font-18.white-text.exception-message
+            %p.medium-small
+              %h6.margin-t-0.blue-text.text-lighten-4.font-12.exception-raw
+              %h6.margin-t-0.blue-text.text-lighten-4.font-12.exception-date
+          .col.l4.s12.margin-t-10
+            %a.white.blue-text.waves-effect.waves-green.btn.margin-t-10
+              %i.material-icons.left> done
+              Mark as resolved      
+      .card-action.p0.grey.lighten-3
+        .row.margin-0
+          .col.l2.s6.center-align
+            %h3.margin-b-0.margin-t-10.orange-text.exception-total-count
+            %p.margin-t-0.medium-small.orange-text.text-lighten-1.font-12 Total Occurrences
+          .col.l2.s6.center-align
+            %h3.margin-b-0.margin-t-10.teal-text.exception-new-count
+            %p.margin-t-0.medium-small.teal-text.text-lighten-1.font-12 Since Last Resolved  
+          .col.l3.s12.p10
+            .font-12.grey-text You can ingore this issue and from next time it won't be reported again.
+
+            %input#ignore-issue-box.filled-in{:checked => "checked", :type => "checkbox"}
+            %label.margin-t-10{:for => "ignore-issue-box"} Ignore this issue             
+          .col.l5.s12
+            %canvas#log-count-canvas{:height => "93",:style=>"float:right; margin-bottom:-2px;"}                
     .col.s12.exception-info
       .card
          
