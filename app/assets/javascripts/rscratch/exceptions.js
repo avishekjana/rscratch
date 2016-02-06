@@ -19,7 +19,7 @@ $(document).ready(function() {
     $('.exception-total-count').html(e_total_count);
     $('.exception-new-count').html(e_new_count);
     $('.exception-date').html("Last occured on: " + e_date);
-    $('.ex-controller').html("Controller & Action: " + e_controller + "#" + e_action);
+    // $('.ex-controller').html("Controller & Action: " + e_controller + "#" + e_action);
     $(".exception-item").removeClass("selected");
     $(".excp-item-" + e_id).addClass("selected");
     loader = JST['rscratch/templates/loader'];
@@ -58,11 +58,12 @@ $(document).ready(function() {
       label_array.push(data[i].date);
       i++;
     }
-    if (label_array.length < 50) {
-      empty = 50 - label_array.length;
+    if (label_array.length < 30) {
+      empty = 30 - label_array.length;
       j = 0;
       while (j < empty) {
-        label_array.push(' ');
+        count_array.unshift('');
+        label_array.unshift('-');
         j++;
       }
     }
@@ -74,10 +75,10 @@ $(document).ready(function() {
       datasets: [
         {
           label: 'Exception count, group by date',
-          fillColor: 'rgba(250, 250, 250, 0.5)',
-          strokeColor: 'rgba(255, 255, 255, 1)',
-          highlightFill: 'rgba(255, 255, 255, 0.7)',
-          highlightStroke: 'rgba(255, 255, 255, 0.7)',
+          fillColor: 'rgba(158, 158, 158, 0.5)',
+          strokeColor: 'rgba(158, 158, 158, 0.9)',
+          highlightFill: 'rgba(158, 158, 158, 0.3)',
+          highlightStroke: 'rgba(158, 158, 158, 0.7)',
           data: count_array
         }
       ]
@@ -88,7 +89,7 @@ $(document).ready(function() {
       showScale: false,
       animationSteps: 15,
       barValueSpacing: 1,
-      responsive: true
+      responsive: false
     });
   };
 });
