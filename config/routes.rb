@@ -1,6 +1,11 @@
 Rscratch::Engine.routes.draw do
 
-  resources :exceptions
+  resources :exceptions do 
+    member do
+      post "toggle_ignore/:id", action: :toggle_ignore, as: :toggle_ignore
+      post "resolve/:id", action: :resolve, as: :resolve
+    end
+  end    
 
   get "dashboard/index"
 
