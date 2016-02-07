@@ -48,7 +48,11 @@ module Rscratch
       self.client_ip      = request.remote_ip,
       self.status         = "new"   
     end    
-
+    
+    def resolve!
+      update_attribute(:status, 'resolved')
+    end
+    
     private
 
     def calculate_exception_count
