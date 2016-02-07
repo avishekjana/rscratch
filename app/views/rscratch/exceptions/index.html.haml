@@ -17,10 +17,8 @@
     #resolved-ex.p0
       = smart_listing_render :resolved_exceptions
 
-  .col.s8.p0{:style=>"float:right"}
+  .col.s8.p0.right
     .card#log-page-header.exception-info.margin-0.waves-effect.waves-block.waves-light
-      / .card-image.grey.lighten-4
-      /   %canvas#log-count-canvas{:height => "182", :width=>"600"}
       .card-content.p0.blue.border-radius-0
         .row.margin-0
           .col.l8.s12
@@ -42,14 +40,42 @@
             %p.margin-t-0.medium-small.teal-text.text-lighten-1.font-12 Since Last Resolved  
           .col.l3.s12.p10
             .font-12.grey-text You can ingore this issue and from next time it won't be reported again.
-
-            %input#ignore-issue-box.filled-in{:checked => "checked", :type => "checkbox"}
+            %input#ignore-issue-box.filled-in{:checked => false, :type => "checkbox"}
             %label.margin-t-10{:for => "ignore-issue-box"} Ignore this issue             
-          .col.l5.s12
-            %canvas#log-count-canvas{:height => "93",:style=>"float:right; margin-bottom:-2px;"}                
+          .col.l5.s12.hide-on-small-only
+            %canvas#log-count-canvas.right{:height => "93",:style=>"margin-bottom:-2px;"}                
     .col.s12.exception-info
+
+      
       .card
-         
+        %ul.pagination.right
+          %li
+            %a{:href => "#!"}
+              %i.material-icons bug_report
+
+          %li
+            %a{:href => "#!"}
+              %span.current-log 1
+              of
+              %span.exception-total-count
+          %li.waves-effect
+            %a.exception-data.log-navigator.arrow-first{:href => "#!", "data-navigate"=>"first"}
+              %i.material-icons fast_rewind
+          %li.waves-effect
+            %a.exception-data.log-navigator.arrow-previous{:href => "#!", "data-navigate"=>"previous"}
+              %i.material-icons chevron_left
+          %li.active
+            %a.current-log{:href => "#!"} 1
+            %input#current_page_num{:type=>"hidden"}
+            %input#total_page_count{:type=>"hidden"}
+            %input#exception_entry_id{:type=>"hidden"}
+          %li.waves-effect
+            %a.exception-data.log-navigator.arrow-next{:href => "#!", "data-navigate"=>"next"}
+              %i.material-icons chevron_right  
+          %li.waves-effect
+            %a.exception-data.log-navigator.arrow-last{:href => "#!", "data-navigate"=>"last"}
+              %i.material-icons fast_forward  
+
         %ul.tabs.tab-profile.z-depth-1.red
           %li.tab
             %a.white-text.waves-effect.waves-light.active{:href => "#overview"}
