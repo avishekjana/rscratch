@@ -2,7 +2,7 @@
   %ul.collection.margin-t-0
     - smart_listing.collection.each do |object|
       %li.collection-item.avatar.min-height-70.waves-effect.width-100.exception-item{:class=>"excp-item-#{object.id}","data-exception-id"=>object.id, "data-exception-message"=>object.message, "data-exception-date"=>object.updated_at.strftime("%d-%m-%Y, %I:%M %p"), "data-exception-total-count"=>object.total_occurance_count, "data-exception-new-count"=>object.new_occurance_count, "data-exception-controller"=>object.controller, "data-exception-action"=>object.action, "data-exception-raw"=>object.exception}
-        %i.margin-t-5.material-icons.circle.red.font-24 bug_report
+        %i.margin-t-5.material-icons.circle.grey.font-24 bug_report
         %span.secondary-content.label=object.total_occurance_count
         %h6.grey-text.text-darken-4.margin-t-0.truncate=object.message
         %h6.grey-text.text-darken-3.margin-t-0.truncate.font-11=object.exception
