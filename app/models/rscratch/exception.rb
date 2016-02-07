@@ -2,7 +2,7 @@ module Rscratch
   class Exception < ActiveRecord::Base
     
     if Rails::VERSION::MAJOR == 3
-      attr_accessible :action, :app_environment, :controller, :exception, :message, :new_occurance_count, :total_occurance_count, :status
+      attr_accessible :action, :app_environment, :controller, :exception, :message, :new_occurance_count, :total_occurance_count, :status, :is_ignored
     end
     
     STATUS = %w(new under_development resolved)
@@ -63,14 +63,39 @@ module Rscratch
     end
 
     # Sets Exception instance attributes.
-    def set_attributes_for exc, _controller, _action, _env
-      self.exception = exc.class
-      self.message = exc.message
+    def set_attributes_for _exception, _controller, _action, _env
+      self.exception = _exception.class
+      self.message = _exception.message
       self.controller = _controller
       self.action = _action
       self.app_environment = _env
       self.status = "new"
     end
+    
+    def resolve!
+      update_attribute(:status, 'resolved')
+      self.exception_logs.first.resolve!
+      reset_counter!
+    end
+    
+    def ignored?
+      self.is_ignored == true
+    end
+    
+    def dont_ignore!
+      update_attribute(:is_ignored, false)
+    end
 
+    def ignore!
+      update_attribute(:is_ignored, true)
+    end
+
+    def toggle_ignore!
+      ignored? ? dont_ignore! : ignore!
+    end
+
+    def reset_counter!
+      update_attribute(:new_occurance_count, 0)
+    end
   end
 end
