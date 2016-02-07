@@ -16,7 +16,7 @@
   var created_at = new Date(response.created_at);
   var created_at = created_at.format("dd-mm-yyyy hh:MM TT","GMT");
 
-  var updated_at = new Date(response.updated_at);
+  var updated_at = new Date(response.log.created_at);
   var updated_at = updated_at.format("dd-mm-yyyy hh:MM TT","GMT");  
 %>
 <div class="row">
@@ -46,6 +46,14 @@
 <div class="row">
   <div class="col s3">Request Method</div>
   <div class="col s9"><%= response.log.request_method %></div>
+</div>
+<div class="row">
+  <div class="col s3">Controller</div>
+  <div class="col s9"><%= response.controller %></div>
+</div>
+<div class="row">
+  <div class="col s3">Action</div>
+  <div class="col s9"><%= response.action %></div>
 </div>
 <div class="row">
   <div class="col s3">Client IP</div>
