@@ -2,6 +2,8 @@ $(document).ready(function() {
   var get_exception_data, load_log_summary_bar_chart, logCountBarChart;
   $(".exception-info").hide();
   logCountBarChart = void 0;
+
+  // Getting exception details
   $(document).on("click", ".exception-item", function() {
     var e_action, e_controller, e_date, e_id, e_message, e_new_count, e_raw, e_total_count, loader;
     $(".exception-info").show();
@@ -19,13 +21,38 @@ $(document).ready(function() {
     $('.exception-total-count').html(e_total_count);
     $('.exception-new-count').html(e_new_count);
     $('.exception-date').html("Last occured on: " + e_date);
-    // $('.ex-controller').html("Controller & Action: " + e_controller + "#" + e_action);
     $(".exception-item").removeClass("selected");
     $(".excp-item-" + e_id).addClass("selected");
     loader = JST['rscratch/templates/loader'];
     $('.progress-loader').html(loader);
     get_exception_data(e_id, 1);
   });
+
+  // Log pagination
+  $(document).on("click", ".log-navigator", function() {
+    current_page = parseFloat($("#current_page_num").val());
+    total_page = parseFloat($("#total_page_count").val());
+    e_id = parseFloat($("#exception_entry_id").val());
+    nav = $(this).data("navigate");
+    page = get_page_number(nav,current_page,total_page)
+    get_exception_data(e_id, page);
+  });
+
+  // Getting page number
+  get_page_number = function(nav,current_page,total_page,page = 0){
+    if(nav == "first"){ page = 1; }
+    else if(nav == "last"){ page = total_page; }
+    else if(nav == "next"){
+      if(current_page == total_page){ page = total_page; }
+      else{ page = current_page + 1; }
+    } else if(nav == "previous"){
+      if(current_page == 1){ page = 1; }
+      else{ page = current_page - 1; }
+    }
+    return page
+  }
+
+  // Getting exception details
   get_exception_data = function(exception_id, page) {
     var request;
     request = $.ajax({
@@ -38,6 +65,13 @@ $(document).ready(function() {
       if (page === 1) {
         load_log_summary_bar_chart(rData.data.log_summary);
       }
+      // Setting pagination values
+      $("#current_page_num").val(page);
+      $("#total_page_count").val(rData.data.total_occurance_count);
+      $("#exception_entry_id").val(exception_id);  
+      $(".current-log").html(page);
+
+      // Setting log data
       $(".ex-backtrace").html(rData.data.log.backtrace);
       $(".ex-params").html(rData.data.log.parameters);
       rData.response = rData.data;
@@ -48,6 +82,8 @@ $(document).ready(function() {
       alert("AJAX Error:" + textStatus);
     });
   };
+
+  // Load bar chart
   load_log_summary_bar_chart = function(data) {
     var countBarChart, count_array, dataBarChart, empty, i, j, label_array;
     count_array = [];
@@ -75,8 +111,8 @@ $(document).ready(function() {
       datasets: [
         {
           label: 'Exception count, group by date',
-          fillColor: 'rgba(158, 158, 158, 0.5)',
-          strokeColor: 'rgba(158, 158, 158, 0.9)',
+          fillColor: 'rgba(158, 158, 158, 0.8)',
+          strokeColor: 'rgba(158, 158, 158, 1)',
           highlightFill: 'rgba(158, 158, 158, 0.3)',
           highlightStroke: 'rgba(158, 158, 158, 0.7)',
           data: count_array
