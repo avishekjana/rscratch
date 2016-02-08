@@ -27,9 +27,12 @@
               %h6.margin-t-0.blue-text.text-lighten-4.font-12.exception-raw
               %h6.margin-t-0.blue-text.text-lighten-4.font-12.exception-date
           .col.l4.s12.margin-t-10
-            %a.white.blue-text.waves-effect.waves-green.btn.margin-t-10
-              %i.material-icons.left> done
+            %a.white#mark-resolve-btn.blue-text.waves-effect.waves-green.btn.margin-t-10
+              %i.material-icons.left> golf_course
               Mark as resolved      
+            %a.white#resolved-btn.blue-text.waves-effect.waves-green.btn.margin-t-10
+              %i.material-icons.left> done
+              Issue Resolved                    
       .card-action.p0.grey.lighten-3
         .row.margin-0
           .col.l2.s6.center-align
@@ -52,7 +55,6 @@
           %li
             %a{:href => "#!"}
               %i.material-icons bug_report
-
           %li
             %a.font-12{:href => "#!"}
               %span.current-log 1
