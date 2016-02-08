@@ -15,7 +15,7 @@ module Rscratch
     validates :status, presence: true, :inclusion => {:in => STATUS}
 
     ### => Model Callbacks
-    after_create :calculate_exception_count
+    after_create :calculate_log_count
 
     # => Dynamic methods for log statuses
     STATUS.each do |status|
@@ -49,17 +49,29 @@ module Rscratch
       self.status         = "new"   
     end    
     
-    def resolve!
-      update_attribute(:status, 'resolved')
+    def log_count exception_id
+      ExceptionLog.by_exception(exception_id).count
     end
+
+    def last_resolved exception_id
+      ExceptionLog.by_exception(exception_id).resolved.last
+    end    
     
+    def new_log_count exception_id
+      _last_resolved = last_resolved exception_id
+      _new_count = _last_resolved.present? ? ExceptionLog.by_exception(exception_id).unresolved_exceptions(_last_resolved.id).count : log_count(exception_id)
+    end
+
     private
 
-    def calculate_exception_count
-      _exception_logs = ExceptionLog.by_exception(self.exception_id)
-      _last_resolved = _exception_logs.resolved.last
-      _new_logs = _last_resolved.present? ? (ExceptionLog.unresolved_exceptions(_last_resolved.id)) : _exception_logs
-      self.exception.update_attributes(:total_occurance_count=>_exception_logs.count, :new_occurance_count=>_new_logs.count)
+    def calculate_log_count
+      _log_count = log_count self.exception_id
+      _new_count = new_log_count self.exception_id
+
+      # _exception_logs = ExceptionLog.by_exception(self.exception_id)
+      # _last_resolved = _exception_logs.resolved.last
+      # _new_logs = _last_resolved.present? ? (ExceptionLog.by_exception(self.exception_id).unresolved_exceptions(_last_resolved.id)) : _exception_logs
+      self.exception.update_attributes(:total_occurance_count=>_log_count, :new_occurance_count=>_new_count)
     end  
   end
 end
