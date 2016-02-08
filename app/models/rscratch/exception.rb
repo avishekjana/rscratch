@@ -37,19 +37,16 @@ module Rscratch
     end
 
     # Log an exception
-    def self.log(exc,request) 
-      _exception = self.find_or_create(exc,request.filtered_parameters["controller"].camelize,request.filtered_parameters["action"],Rails.env.camelize)
-      _log = ExceptionLog.new(
-                                  :description         => exc.inspect,
-                                  :backtrace           => exc.backtrace.join("\n"),
-                                  :request_url         => request.original_url,
-                                  :request_method      => request.request_method,
-                                  :parameters          => request.filtered_parameters,
-                                  :user_agent          => request.user_agent,
-                                  :client_ip           => request.remote_ip,
-                                  :status              => "new")
-      _exception.exception_logs << _log
-      return _exception
+    def self.log(_exception,_request) 
+      _exc = self.find_or_create(_exception,_request.filtered_parameters["controller"].camelize,_request.filtered_parameters["action"],Rails.env.camelize)
+      if _exc.is_ignored == false
+        @log = ExceptionLog.new
+        @log.set_attributes_for _exception,_request
+        _exc.exception_logs << @log 
+      else
+        @log = _exc.exception_logs.last
+      end
+      return {:exception_id => _exc.id, :log_id => @log.id, :log_url => "/rscratch/exception_logs/#{@log.id}"}
     end
 
     # Log unique exceptions
