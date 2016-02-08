@@ -2,7 +2,7 @@ Rscratch::Engine.routes.draw do
 
   resources :exceptions do 
     member do
-      post "toggle_ignore/:id", action: :toggle_ignore, as: :toggle_ignore
+      post "toggle_ignore"
       post "resolve"
     end
   end    
