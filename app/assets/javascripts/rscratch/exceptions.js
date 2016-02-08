@@ -8,6 +8,9 @@ $(document).ready(function() {
     var e_action, e_controller, e_date, e_id, e_message, e_new_count, e_raw, e_total_count, loader;
     $(".exception-info").show();
     $(".no-exception").hide();
+    $("#mark-resolve-btn").hide();
+    $("#resolved-btn").hide();    
+    // Getting data attributes
     e_id = $(this).data("exception-id");
     e_message = $(this).data("exception-message");
     e_raw = $(this).data("exception-raw");
@@ -16,6 +19,9 @@ $(document).ready(function() {
     e_new_count = $(this).data("exception-new-count");
     e_controller = $(this).data("exception-controller");
     e_action = $(this).data("exception-action");
+    e_status = $(this).data("exception-status");
+    e_ignore = $(this).data("exception-ignore");
+    // Setting data
     $('.exception-message').html(e_message);
     $('.exception-raw').html(e_raw);
     $('.exception-total-count').html(e_total_count);
@@ -23,6 +29,7 @@ $(document).ready(function() {
     $('.exception-date').html("Last occured on: " + e_date);
     $(".exception-item").removeClass("selected");
     $(".excp-item-" + e_id).addClass("selected");
+
     loader = JST['rscratch/templates/loader'];
     $('.progress-loader').html(loader);
     get_exception_data(e_id, 1);
@@ -38,8 +45,27 @@ $(document).ready(function() {
     get_exception_data(e_id, page);
   });
 
+  // Log pagination
+  $(document).on("click", "#mark-resolve-btn", function() {
+    exception_id = $("#exception_entry_id").val();
+    var request;
+    request = $.ajax({
+      type: 'POST',
+      url: "/rscratch/exceptions/" + exception_id + "/resolve.json",
+      dataType: "json"
+    });    
+    request.done(function(rData, textStatus, jqXHR) {
+      $("#mark-resolve-btn").hide();
+      $("#resolved-btn").show();  
+    });
+    request.error(function(jqXHR, textStatus, errorThrown) {
+      alert("AJAX Error:" + textStatus);
+    });    
+  });
+
   // Getting page number
-  get_page_number = function(nav,current_page,total_page,page = 0){
+  get_page_number = function(nav,current_page,total_page){
+    var page = 0;
     if(nav == "first"){ page = 1; }
     else if(nav == "last"){ page = total_page; }
     else if(nav == "next"){
@@ -64,6 +90,13 @@ $(document).ready(function() {
       var over_data;
       if (page === 1) {
         load_log_summary_bar_chart(rData.data.log_summary);
+      }
+      if(rData.data.status == "new") { 
+        $("#mark-resolve-btn").show(); 
+        $("#resolved-btn").hide(); 
+      }else { 
+        $("#mark-resolve-btn").hide(); 
+        $("#resolved-btn").show(); 
       }
       // Setting pagination values
       $("#current_page_num").val(page);
