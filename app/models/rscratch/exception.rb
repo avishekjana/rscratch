@@ -26,6 +26,9 @@ module Rscratch
     scope :by_environment, lambda {|env|where(["app_environment=?", env])}   
     scope :by_status, lambda {|status|where(["status=?", status])}   
 
+    ### => Model Callbacks
+    before_validation :set_default_attributes
+
     # => Dynamic methods for exception statuses
     STATUS.each do |status|
       define_method "#{status}?" do
@@ -69,12 +72,16 @@ module Rscratch
       self.controller = _controller
       self.action = _action
       self.app_environment = _env
-      self.status = "new"
     end
+    
+    # Setting new default attributes
+    def set_default_attributes
+      self.status = "new"
+    end    
     
     def resolve!
       update_attribute(:status, 'resolved')
-      self.exception_logs.first.resolve!
+      self.exception_logs.last.resolve!
       reset_counter!
     end
     
