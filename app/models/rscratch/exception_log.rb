@@ -38,7 +38,7 @@ module Rscratch
     end
     
     # Sets Log instance attributes.
-    def self.set_attributes_for exc, request
+    def set_attributes_for exc, request
       self.description    = exc.inspect,
       self.backtrace      = exc.backtrace.join("\n"),
       self.request_url    = request.original_url,
@@ -67,10 +67,6 @@ module Rscratch
     def calculate_log_count
       _log_count = log_count self.exception_id
       _new_count = new_log_count self.exception_id
-
-      # _exception_logs = ExceptionLog.by_exception(self.exception_id)
-      # _last_resolved = _exception_logs.resolved.last
-      # _new_logs = _last_resolved.present? ? (ExceptionLog.by_exception(self.exception_id).unresolved_exceptions(_last_resolved.id)) : _exception_logs
       self.exception.update_attributes(:total_occurance_count=>_log_count, :new_occurance_count=>_new_count)
     end  
   end
