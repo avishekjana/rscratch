@@ -19,16 +19,20 @@ module Rscratch
 
     def show
       @log = @excp.exception_logs.order("created_at desc").page(params[:page]).per(1)
-      @historical_data = @excp.exception_logs.select("count(id) as exception_count, date(created_at) as date").group("date(created_at)").order("date(created_at)").last(30)
+      @historical_data = @excp.exception_logs.select("count(id) as exception_count, date(created_at) as date").group("date(created_at)").order("date(created_at)").last(30) if params[:page] == "1"
       rescue Exception => @error          
     end  
 
     def toggle_ignore
       @excp.toggle_ignore!
+      @excp.reload
+      rescue Exception => @error          
     end
 
     def resolve
       @excp.resolve!
+      @excp.reload
+      rescue Exception => @error          
     end    
 
     private
