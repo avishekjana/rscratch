@@ -45,7 +45,7 @@ $(document).ready(function() {
     get_exception_data(e_id, page);
   });
 
-  // Log pagination
+  // Resolve issue
   $(document).on("click", "#mark-resolve-btn", function() {
     exception_id = $("#exception_entry_id").val();
     var request;
@@ -62,6 +62,26 @@ $(document).ready(function() {
       alert("AJAX Error:" + textStatus);
     });    
   });
+
+  // ignore toggle issue
+  $(document).on("click", "#ignore-issue-box", function() {
+    exception_id = $("#exception_entry_id").val();
+    var request;
+    request = $.ajax({
+      type: 'POST',
+      url: "/rscratch/exceptions/" + exception_id + "/toggle_ignore.json",
+      dataType: "json"
+    });    
+    request.done(function(rData, textStatus, jqXHR) {
+      if(rData.status == "ok"){
+        Materialize.toast("Issue successfully updated", 5000)
+      }
+    });
+    request.error(function(jqXHR, textStatus, errorThrown) {
+      alert("AJAX Error:" + textStatus);
+    });    
+  });  
+
 
   // Getting page number
   get_page_number = function(nav,current_page,total_page){
@@ -91,6 +111,7 @@ $(document).ready(function() {
       if (page === 1) {
         load_log_summary_bar_chart(rData.data.log_summary);
       }
+      // Checking resolve status
       if(rData.data.status == "new") { 
         $("#mark-resolve-btn").show(); 
         $("#resolved-btn").hide(); 
@@ -98,6 +119,13 @@ $(document).ready(function() {
         $("#mark-resolve-btn").hide(); 
         $("#resolved-btn").show(); 
       }
+
+      // Checking toggle status
+      if(rData.data.is_ignored == false) { 
+        $("#ignore-issue-box").prop('checked', false); 
+      }else { 
+        $("#ignore-issue-box").prop('checked', true); 
+      }      
       // Setting pagination values
       $("#current_page_num").val(page);
       $("#total_page_count").val(rData.data.total_occurance_count);
