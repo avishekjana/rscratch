@@ -5,6 +5,9 @@ Rscratch::Engine.routes.draw do
       post "toggle_ignore"
       post "resolve"
     end
+    collection do
+      get "log/:id", to: "exceptions#log", as: "log"
+    end
   end    
 
   get "dashboard/index"
