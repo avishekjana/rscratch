@@ -23,6 +23,10 @@ module Rscratch
       rescue Exception => @error          
     end  
 
+    def log
+
+    end
+    
     def toggle_ignore
       @excp.toggle_ignore!
       @excp.reload
