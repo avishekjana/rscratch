@@ -46,7 +46,11 @@ module Rscratch
       else
         @log = _exc.exception_logs.last
       end
-      return {:exception_id => _exc.id, :log_id => @log.id, :log_url => "/rscratch/exception_logs/#{@log.id}"}
+      _hash = { :exception_id => _exc.id, 
+                :log_serial => @log.id, 
+                :log_url => "#{_request.base_url}#{Rscratch::Engine.routes.url_helpers.log_exceptions_path(@log)}" 
+              }
+      return _hash
     end
 
     # Log unique exceptions
