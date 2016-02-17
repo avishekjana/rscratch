@@ -14,6 +14,14 @@ RScratch is a Ruby on Rails gem that helps you to manage bugs in your applicatio
 * UI is developed on top of Material Design.
 * Exception log comes with full backtrace, parameters, client details and request preconditions.
 
+### Screenshots
+
+#### Dashboard
+![Rscratch Dashboard](./doc/Screen-Dashboard.png)
+
+#### Exception Details
+![Rscratch Dashboard](./doc/Screen-Exception.png)
+
 ## Installation
 
 Add this line to your application's Gemfile:
