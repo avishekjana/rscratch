@@ -10,7 +10,7 @@ module Rscratch
     @configuration ||= Configuration.new
   end  
 
-  def self.log_exception(_e,_r)
-    log = Exception.log(_e, _r)
+  def self.log_exception(exception, request)
+    log = Rscratch::Exception.log(exception, request)
   end
 end
