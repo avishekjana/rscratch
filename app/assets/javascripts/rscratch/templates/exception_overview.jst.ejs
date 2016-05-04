@@ -13,53 +13,61 @@
       return entityMap[s];
     });
   }
-  var created_at = new Date(response.created_at);
-  var created_at = created_at.format("dd-mm-yyyy hh:MM TT","GMT");
+  var seen_at = new Date(response.log.created_at);
+  var seen_at = seen_at.format("dd-mm-yyyy hh:MM TT","GMT"); 
 
-  var updated_at = new Date(response.log.created_at);
+  var created_at = new Date(response.created_at);
+  var created_at = created_at.format("dd-mm-yyyy hh:MM TT","GMT"); 
+
+  var updated_at = new Date(response.updated_at);
   var updated_at = updated_at.format("dd-mm-yyyy hh:MM TT","GMT");  
 %>
-<div class="row">
-  <div class="col s3">First seen at</div>
-  <div class="col s9"><%= created_at %></div>
-</div>
-<div class="row">
-  <div class="col s3">Last seen at</div>
-  <div class="col s9"><%= updated_at %></div>
-</div>
-<div class="row">
-  <div class="col s3">Occurrences</div>
-  <div class="col s9"><%= response.total_occurance_count %></div>
-</div>
-<div class="row">
-  <div class="col s3">Description</div>
-  <div class="col s9"> <%= escapeHtml(response.log.description) %></div>
-</div>
-<div class="row">
-  <div class="col s3">Environment</div>
-  <div class="col s9"><%= response.app_environment %></div>
-</div>
-<div class="row">
-  <div class="col s3">Request URL</div>
-  <div class="col s9"><%= response.log.request_url %></div>
-</div>
-<div class="row">
-  <div class="col s3">Request Method</div>
-  <div class="col s9"><%= response.log.request_method %></div>
-</div>
-<div class="row">
-  <div class="col s3">Controller</div>
-  <div class="col s9"><%= response.controller %></div>
-</div>
-<div class="row">
-  <div class="col s3">Action</div>
-  <div class="col s9"><%= response.action %></div>
-</div>
-<div class="row">
-  <div class="col s3">Client IP</div>
-  <div class="col s9"><%= response.log.client_ip %></div>
-</div>
-<div class="row">
-  <div class="col s3">User Agent</div>
-  <div class="col s9"><%= response.log.user_agent %></div>
-</div>
+<table>
+  <tbody>
+    <tr>
+      <td class="p5">Occured at</td>
+      <td class="p5"><%= seen_at %></td>
+    </tr>      
+    <tr>
+      <td class="p5">First occured at</td>
+      <td class="p5"><%= created_at %></td>
+    </tr>
+
+    <tr>
+      <td class="p5">Last occured at</td>
+      <td class="p5"><%= updated_at %></td>
+    </tr>
+    <tr>
+      <td class="p5">Description</td>
+      <td class="p5"><%= escapeHtml(response.log.description) %></td>
+    </tr>
+    <tr>
+      <td class="p5">Environment</td>
+      <td class="p5"><%= response.app_environment %></td>
+    </tr>
+    <tr>
+      <td class="p5">Request URL</td>
+      <td class="p5"><%= response.log.request_url %></td>
+    </tr>
+    <tr>
+      <td class="p5">Request Method</td>
+      <td class="p5"><%= response.log.request_method %></td>
+    </tr>
+    <tr>
+      <td class="p5">Controller</td>
+      <td class="p5"><%= response.controller %></td>
+    </tr>
+    <tr>
+      <td class="p5">Action</td>
+      <td class="p5"><%= response.action %></td>
+    </tr>
+    <tr>
+      <td class="p5">Client IP</td>
+      <td class="p5"><%= response.log.client_ip %></td>
+    </tr>
+    <tr>
+      <td class="p5">User Agent</td>
+      <td class="p5"><%= response.log.user_agent %></td>
+    </tr>
+  </tbody>
+</table>
