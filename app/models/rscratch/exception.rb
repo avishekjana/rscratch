@@ -19,12 +19,12 @@ module Rscratch
     validates :status          , presence: true, :inclusion => {:in => STATUS}
                       
     ### => Model Scopes
-    scope :by_exception, lambda {|exc|where(["exception=?", exc])}                      
-    scope :by_message, lambda {|msg|where(["message=?", msg])}                      
-    scope :by_controller, lambda {|con|where(["controller=?", con])}                      
-    scope :by_action, lambda {|act|where(["action=?", act])}                      
-    scope :by_environment, lambda {|env|where(["app_environment=?", env])}   
-    scope :by_status, lambda {|status|where(["status=?", status])}   
+    scope :by_exception,    lambda {|exc|where(["exception=?", exc])}
+    scope :by_message,      lambda {|msg|where(["message=?", msg])}
+    scope :by_controller,   lambda {|con|where(["controller=?", con])}
+    scope :by_action,       lambda {|act|where(["action=?", act])}
+    scope :by_environment,  lambda {|env|where(["app_environment=?", env])}
+    scope :by_status,       lambda {|status|where(["status=?", status])}
 
     ### => Model Callbacks
     before_validation :set_default_attributes
@@ -39,31 +39,24 @@ module Rscratch
     # Log an exception
     def self.log(_exception,_request) 
       _exc = self.find_or_create(_exception,_request.filtered_parameters["controller"].camelize,_request.filtered_parameters["action"],Rails.env.camelize)
-      if _exc.is_ignored == false
-        @log = ExceptionLog.new
-        @log.set_attributes_for _exception,_request
-        _exc.exception_logs << @log 
-      else
-        @log = _exc.exception_logs.last
+      unless _exc.ignored?
+        _log = ExceptionLog.new
+        _log.set_attributes_for _exception,_request
+        _exc.exception_logs << _log 
       end
-      _hash = { :exception_id => _exc.id, 
-                :log_serial => @log.id, 
-                :log_url => "#{_request.base_url}#{Rscratch::Engine.routes.url_helpers.log_exceptions_path(@log)}" 
-              }
-      return _hash
+      _exc_log = _exc.exception_logs.last
+      return { :exception_id => _exc.id, :log_serial => _exc_log.id, :log_url => "#{_request.base_url}#{Rscratch::Engine.routes.url_helpers.log_exceptions_path(_exc_log)}" }
     end
 
     # Log unique exceptions
     def self.find_or_create exc,_controller,_action,_env              
-      _excp = Exception.by_exception(exc.class).by_message(exc.message).by_controller(_controller).by_action(_action).by_environment(_env)
-      if _excp.present?
-        return _excp.first
-      else
+      _excp = Exception.by_exception(exc.class).by_message(exc.message).by_controller(_controller).by_action(_action).by_environment(_env).first
+      unless _excp.present?
         _excp = Exception.new
         _excp.set_attributes_for exc, _controller, _action, _env
-        _excp.save!
-        _excp
+        _excp.save!        
       end
+      _excp
     end
 
     # Sets Exception instance attributes.
@@ -89,6 +82,10 @@ module Rscratch
     def ignored?
       self.is_ignored == true
     end
+
+    def not_ignored?
+      !ignored?
+    end    
     
     def dont_ignore!
       update_attribute(:is_ignored, false)

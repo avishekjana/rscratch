@@ -11,14 +11,12 @@
       %li.tab.col.s6
         %a.white-text.waves-effect.waves-light{:href => "#resolved-ex"} Resolved
     #new-ex.p0
-      =# smart_listing_controls_for(:exceptions, {class: "form-inline text-right"}) do
-      =# text_field_tag :filter, '', class: "search form-control", placeholder: "Search...", autocomplete: :off    
       = smart_listing_render :exceptions
     #resolved-ex.p0
       = smart_listing_render :resolved_exceptions
 
   .col.s8.p0.right
-    .card#log-page-header.exception-info.margin-0.waves-effect.waves-block.waves-light
+    .card#log-page-header.exception-info.margin-0
       .card-content.p0.blue.border-radius-0
         .row.margin-0
           .col.l8.s12

@@ -39,14 +39,14 @@ module Rscratch
     
     # Sets Log instance attributes.
     def set_attributes_for exc, request
-      self.description    = exc.inspect,
       self.backtrace      = exc.backtrace.join("\n"),
       self.request_url    = request.original_url,
       self.request_method = request.request_method,
       self.parameters     = request.filtered_parameters,
       self.user_agent     = request.user_agent,
       self.client_ip      = request.remote_ip,
-      self.status         = "new"   
+      self.status         = "new",
+      self.description    = exc.inspect
     end    
     
     def log_count exception_id
