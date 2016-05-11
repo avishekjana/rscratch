@@ -46,7 +46,7 @@ You should restart your application after installing RScratch gem.
 ## Usage
 Add this following line in rescue block of your your code. An example is given below
 ```ruby
-  Rscratch::Exception.log e,request
+  Rscratch.log_exception e,request
 ```
 
 An example is given below
@@ -61,7 +61,7 @@ An example is given below
       end      
     rescue Exception => e
       # Log exception in RScratch
-      Rscratch::Exception.log e,request
+      Rscratch.log_exception e,request
       
       respond_to do |format|
         format.json { render json: @post.errors, status: :unprocessable_entity }
